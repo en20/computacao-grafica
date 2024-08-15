@@ -21,19 +21,18 @@ const MeteorSize = 20
 
 const WindowVelocity = 20
 
-var meteorTex = tex.ReadImage("./resources/meteor.png")
-var blackHoleTex = tex.ReadImage("./resources/Black_hole.png")
-var terranTex = tex.ReadImage("./resources/Terran.png")
-var lavaTex = tex.ReadImage("./resources/Lava.png")
-var barenTex = tex.ReadImage("./resources/Baren.png")
-var iceTex = tex.ReadImage("./resources/Ice.png")
-var starTex = tex.ReadImage("./resources/star.png")
-var gopherTex = tex.ReadImage("./resources/gopher-astronaut.png")
+var meteorTex = tex.ReadImage("./resources/download-removebg-preview.png")
+var blackHoleTex = tex.ReadImage("./resources/sol.jpg")
+var terranTex = tex.ReadImage("./resources/terra.jpg")
+var lavaTex = tex.ReadImage("./resources/terra.jpg")
+var barenTex = tex.ReadImage("./resources/terra.jpg")
+var iceTex = tex.ReadImage("./resources/terra.jpg")
+var starTex = tex.ReadImage("./resources/enzo.jpg")
+var gopherTex = tex.ReadImage("./resources/maxresdefault.jpg")
 
 var Win = window.New(vec.NewVec2D(0, 0), vec.NewVec2D(Width*WindowFactor, Height*WindowFactor))
 var Mem = memory.New(Width, Height)
 var MainViewport = window.NewViewport(vec.Zeros(), vec.NewVec2D(Width, Height))
-var MiniMap = window.NewViewport(vec.NewVec2D((Width-140), 20), vec.NewVec2D(Width-20, 100))
 
 var stars = GenerateStars()
 var meteors = GenerateMeteors()
@@ -87,7 +86,6 @@ var gopher = geo.NewRect(20, 20, Win.Center()).
 		vec.NewVec2D(0, 1),
 	})
 
-var pol = MakeSun(Win.Center().Sub(vec.NewVec2D(200, 200)), 100, 20)
 
 var rect = geo.NewRect(200, 30, Win.Center().Plus(vec.NewVec2D(200, 200))).WithColors([]color.RGBA{
 	colors.ColorBlue,
@@ -128,10 +126,7 @@ func MapObjectsToVP(vp *window.Viewport) {
 		scan.ScanlineGradient(Mem, s)
 	})
 
-	pol.Apply(func(s *geo.GeometricShape) {
-		Win.MapPoints(s, vp)
-		scan.ScanlineGradient(Mem, s)
-	})
+	
 
 	rect.Apply(func(s *geo.GeometricShape) {
 		Win.MapPoints(s, vp)
@@ -176,7 +171,6 @@ func DrawMeteors(mem memory.Memory) {
 		})
 
 		meteor.Apply(func(s *geo.GeometricShape) {
-			Win.MapPoints(s, MiniMap)
 			scan.ScanlineTexture(Mem, s, meteorTex)
 		})
 	}
@@ -232,20 +226,3 @@ func GenerateMeteors() (meteors []*geo.GeometricShape) {
 	return
 }
 
-func MakeSun(center vec.Vec2D, radius float64, sides int) *geo.GeometricShape {
-
-	c := make([]color.RGBA, sides)
-
-	for i := 0; i < sides; i++ {
-
-		if i%2 == 0 {
-			c[i] = colors.ColorYellow
-		} else {
-			c[i] = colors.ColorRed
-		}
-
-	}
-
-	return geo.CreateCirclePolygon(Win.Center().Sub(vec.NewVec2D(200, 200)), 100, 12).
-		WithColors(c)
-}

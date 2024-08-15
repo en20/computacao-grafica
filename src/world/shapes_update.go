@@ -15,9 +15,8 @@ func ShapesUpdate(ctx *ebiten.Image) {
 	DrawStars(Mem)
 	DrawMeteors(Mem)
 	MapObjectsToVP(MainViewport)
-	MapObjectsToVP(MiniMap)
 
-	MiniMap.DrawBounds(Mem)
+	
 
 	Mem.Draw(ctx)
 
@@ -28,29 +27,6 @@ func ShapesUpdate(ctx *ebiten.Image) {
 	if ebiten.IsKeyPressed(ebiten.KeyX) {
 		Win.Zoom(1.05)
 	}
-
-	if ebiten.IsKeyPressed(ebiten.KeyA) {
-		Win.Translate(vec.NewVec2D(-WindowVelocity, 0))
-		transform.TranslateVertices(Win.Center().Sub(.Center()), gopher)
-		transform.RotateVerticesOnPivot(-4, gopher.Center(), gopher)
-	}
-
-	if ebiten.IsKeyPressed(ebiten.KeyD) {
-		Win.Translate(vec.NewVec2D(WindowVelocity, 0))
-		transform.TranslateVertices(Win.Center().Sub(gopher.Center()), gopher)
-		transform.RotateVerticesOnPivot(4, gopher.Center(), gopher)
-	}
-
-	if ebiten.IsKeyPressed(ebiten.KeyW) {
-		Win.Translate(vec.NewVec2D(0, -WindowVelocity))
-		transform.TranslateVertices(Win.Center().Sub(gopher.Center()), gopher)
-	}
-
-	if ebiten.IsKeyPressed(ebiten.KeyS) {
-		Win.Translate(vec.NewVec2D(0, WindowVelocity))
-		transform.TranslateVertices(Win.Center().Sub(gopher.Center()), gopher)
-	}
-
 	RotateMeteors()
 	transform.RotateVerticesOnPivot(10, blackHole.Center(), blackHole)
 	transform.RotateVerticesOnPivot(0.1, terran.Center(), terran)
