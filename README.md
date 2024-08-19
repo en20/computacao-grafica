@@ -10,5 +10,4 @@
 ## ./cg-go
 
 # Movimentações:
-## WASD para movimentar
 ## Z para zoom e W para diminuir o zoom
