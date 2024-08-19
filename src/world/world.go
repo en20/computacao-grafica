@@ -14,8 +14,8 @@ import (
 )
 
 const Width, Height = 600, 400
-const NumMeteors = 50
-const MeteorsMinDist = 30
+const NumMeteors = 120
+const MeteorsMinDist = 10
 const WindowFactor = 2
 const MeteorSize = 20
 
@@ -23,11 +23,11 @@ const WindowVelocity = 20
 
 var meteorTex = tex.ReadImage("./resources/download-removebg-preview.png")
 var blackHoleTex = tex.ReadImage("./resources/sol.jpg")
-var terranTex = tex.ReadImage("./resources/terra.jpg")
-var lavaTex = tex.ReadImage("./resources/terra.jpg")
-var barenTex = tex.ReadImage("./resources/terra.jpg")
-var iceTex = tex.ReadImage("./resources/terra.jpg")
-var starTex = tex.ReadImage("./resources/enzo.jpg")
+var terranTex = tex.ReadImage("./resources/images.jpg")
+var lavaTex = tex.ReadImage("./resources/images.jpg")
+var barenTex = tex.ReadImage("./resources/images.jpg")
+var iceTex = tex.ReadImage("./resources/images.jpg")
+var starTex = tex.ReadImage("./resources/download (1).jpg")
 var gopherTex = tex.ReadImage("./resources/maxresdefault.jpg")
 
 var Win = window.New(vec.NewVec2D(0, 0), vec.NewVec2D(Width*WindowFactor, Height*WindowFactor))
